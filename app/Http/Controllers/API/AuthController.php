@@ -19,7 +19,7 @@ class AuthController extends Controller
             $user = Auth::user();
             $scope = $request->input('scope');
 
-            if ($user->isApplicant() && $scope !== 'applicant'){
+            if ($user->isApplicant() && $scope !== 'applicant' || $user->isAdmin() && $scope !== 'admin' || $user->isEmployer() && $scope !== 'employer'){
                 return \response([
                     'error' => 'Access denied!',
                 ], Response::HTTP_FORBIDDEN);
